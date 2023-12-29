@@ -1,18 +1,14 @@
 const express = require("express");
+const routesClient = require('./routes/client/index.route');
 
-const app = express();//tạo app sử dụng express
+const app = express();//tạo app để sử dụng express
 const port = 3000;
 
 app.set('views','./views');
 app.set('view engine','pug');
 
-app.get("/", (req, res) => {
-    res.render('client/pages/home/index');
-});
-
-app.get("/products", (req, res) => {
-    res.render('client/pages/products/index');
-});
+//Routes client
+routesClient(app);
 
 app.listen(port, () =>{
     console.log(`App listening on ${port}`);
