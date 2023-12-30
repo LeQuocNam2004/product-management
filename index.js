@@ -1,8 +1,12 @@
 const express = require("express");
 const dotenv = require("dotenv");
-const routesClient = require('./routes/client/index.route');
+const database = require("./config/database");
 
 dotenv.config();
+
+database.connect();
+
+const routesClient = require('./routes/client/index.route');
 
 const app = express();//tạo app để sử dụng express
 const port = process.env.PORT;
