@@ -1,5 +1,6 @@
 const express = require("express");
 const dotenv = require("dotenv");
+const methodOverride = require('method-override')
 const database = require("./config/database");
 const systemConfig = require('./config/system');
 
@@ -12,6 +13,8 @@ const routesClient = require('./routes/client/index.route');
 
 const app = express();//tạo app để sử dụng express
 const port = process.env.PORT;
+
+app.use(methodOverride('_method'))
 
 app.set('views','./views');
 app.set('view engine','pug');
