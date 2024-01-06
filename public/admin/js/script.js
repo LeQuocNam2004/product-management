@@ -116,6 +116,15 @@ if(formChangeMulti){
     formChangeMulti.addEventListener("submit",(event)=>{
         event.preventDefault();//ngăn chặn hành vi mặc định là load lại trang
 
+        const type = event.target.elements.type.value;
+
+        if(type=="deleted-all"){
+            const isConfirm = confirm("Bạn có chắc muốn xóa những bản ghi này?");
+            if(!isConfirm){
+                return;
+            }
+        }
+
         const inputsChecked = document.querySelectorAll("input[name='id']:checked");
         if(inputsChecked.length > 0){
             const ids = [];
