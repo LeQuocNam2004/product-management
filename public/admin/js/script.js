@@ -78,3 +78,60 @@ if(buttonsChangeStatus.length > 0){
     });
 }
 //End button-change-status
+
+//Checkbox-multi
+const checkboxMulti = document.querySelector("[checkbox-multi");
+if(checkboxMulti){
+    const inputCheckAll = checkboxMulti.querySelector("input[name='checkall']");
+    const inputsId = checkboxMulti.querySelectorAll("input[name='id']");
+
+    inputCheckAll.addEventListener("click",()=>{
+        if(inputCheckAll.checked){
+            inputsId.forEach(input =>{
+                input.checked = true;
+            });
+        }else{
+            inputsId.forEach(input =>{
+                input.checked = false;
+            });
+        }
+    });
+
+    inputsId.forEach(input =>{
+        input.addEventListener("click",()=>{
+            const countChecked = checkboxMulti.querySelectorAll("input[name='id']:checked").length;
+            if(countChecked == inputsId.length){
+                inputCheckAll.checked = true;
+            }else{
+                inputCheckAll.checked = false;
+            }
+        });
+    });
+}
+//End checkbox-multi
+
+// Form-change-multi
+const formChangeMulti = document.querySelector("[form-change-multi]");
+if(formChangeMulti){
+    formChangeMulti.addEventListener("submit",(event)=>{
+        event.preventDefault();//ngăn chặn hành vi mặc định là load lại trang
+
+        const inputsChecked = document.querySelectorAll("input[name='id']:checked");
+        if(inputsChecked.length > 0){
+            const ids = [];
+            const inputIds = formChangeMulti.querySelector("input[name='ids']");
+
+            inputsChecked.forEach(input =>{
+                const id = input.value;
+                ids.push(id);
+            });
+            
+            inputIds.value=ids.join(", ");
+
+            formChangeMulti.submit();
+        }else{
+            alert("Vui lòng chọn ít nhất 1 bản ghi!");
+        }
+    });
+}
+// End form-change-multi
