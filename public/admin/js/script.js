@@ -173,3 +173,18 @@ if(buttonsDelete.length > 0){
     });
 }
 //Delete item
+
+//Show alert
+const showAlert = document.querySelector("[show-alert]");
+const time = parseInt(showAlert.getAttribute("data-time"));
+if(showAlert){
+    setTimeout(() => {
+        showAlert.classList.add("alert-hidden");
+    }, time);
+
+    const closeAlert = document.querySelector("[close-alert]");
+    closeAlert.addEventListener("click",() =>{
+        showAlert.classList.add("alert-hidden");
+    });
+}
+//End show alert
