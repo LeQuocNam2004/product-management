@@ -176,8 +176,8 @@ if(buttonsDelete.length > 0){
 
 //Show alert
 const showAlert = document.querySelector("[show-alert]");
-const time = parseInt(showAlert.getAttribute("data-time"));
 if(showAlert){
+    const time = parseInt(showAlert.getAttribute("data-time"));
     setTimeout(() => {
         showAlert.classList.add("alert-hidden");
     }, time);
@@ -188,3 +188,18 @@ if(showAlert){
     });
 }
 //End show alert
+
+// Preview Image
+const uploadImage = document.querySelector("[upload-image]");
+if(uploadImage) {
+  const uploadImageInput = uploadImage.querySelector("[upload-image-input]");
+  const uploadImagePreview = uploadImage.querySelector("[upload-image-preview]");
+
+  uploadImageInput.addEventListener("change", (event) => {
+    const [file] = uploadImageInput.files;
+    if (file) {
+      uploadImagePreview.src = URL.createObjectURL(file);
+    }
+  });
+}
+// End Preview Image
