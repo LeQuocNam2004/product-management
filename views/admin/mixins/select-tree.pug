@@ -2,9 +2,8 @@ mixin select-tree(items,level=1,parentId)
     each item in records 
         - const prefix = Array(level+1).join('-- ')
         option(
-      value=item.id
-      selected=(item.id == parentId ? true : false)
-    ) #{prefix}#{item.title} 
+          value=item.id
+          selected=(item.id == parentId ? true : false)
+        ) #{prefix}#{item.title} 
         if(item.children)
             +select-tree(item.children,level+1, parentId)
-selected=(item.id == parentId ? true : false)
