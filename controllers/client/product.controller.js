@@ -95,16 +95,28 @@ module.exports.category = async (req, res) => {
     });
   }
   
-  // [GET] /products/:slug
+ // [GET] /products/:slugProduct
   module.exports.detail = async (req, res) => {
     try {
-      const slug = req.params.slug;
+      const slug = req.params.slugProduct;
       const product = await Product.findOne({
         slug: slug,
         deleted: false,
         status: "active"
       });
+
+      product.priceNew = (product.price * (100 - product.discountPercentage)/100).toFixed(0);
+
+      if(product.product_category_id) {
+        const category = await ProductCategory.findOne({
+          _id: product.product_category_id
+        });
+
+        product.category = category;
+      }
+
       console.log(product);
+      
       res.render("client/pages/products/detail", {
         pageTitle: product.title,
         product: product
