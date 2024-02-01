@@ -15,32 +15,12 @@ module.exports.index = async(req, res) => {
         item.priceNew = item.priceNew.toFixed(0);
     }
 
-    console.log(products);
+    // console.log(products);
 
     res.render("client/pages/products/index",{
         pageTitle:"Trang danh sách sản phẩm",
         products: products
     });
-}
-
-//[GET] /products/
-module.exports.detail = async(req, res) => {
-    try {
-        const slug = req.params.slug;
-
-        const product = await Product.findOne({
-            slug: slug,
-            deleted: false,
-            status:"active"
-        });
-
-        res.render("client/pages/products/detail",{
-            pageTitle:product.title,
-            product: product
-        });
-    } catch (error) {
-        res.redirect("/");
-    }
 }
 
 // [GET] /products/:slugCategory
@@ -114,8 +94,6 @@ module.exports.category = async (req, res) => {
 
         product.category = category;
       }
-
-      console.log(product);
       
       res.render("client/pages/products/detail", {
         pageTitle: product.title,
