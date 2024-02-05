@@ -48,6 +48,14 @@ routesAdmin(app);
 //Routes client
 routesClient(app);
 
+// 404 Not Found
+app.get("*", (req, res) => {
+    res.render("client/pages/errors/404", {
+      pageTitle: "404 Not Found",
+    });
+    // res.redirect("/");
+});
+
 app.listen(port, () =>{
     console.log(`App listening on ${port}`);
 });
