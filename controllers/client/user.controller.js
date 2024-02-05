@@ -112,7 +112,6 @@ module.exports.forgotPasswordPost = async (req, res) => {
   const objectForgotPassword = {
     email: email,
     otp: otp,
-    expiresAt: Date.now() + 5
   };
 
   const record = new ForgotPassword(objectForgotPassword);
@@ -158,4 +157,29 @@ module.exports.otpPasswordPost = async (req, res) => {
   res.cookie("tokenUser", user.tokenUser);
 
   res.redirect(`/user/password/reset`);
+};
+
+// [GET] /user/password/reset
+module.exports.resetPassword = async (req, res) => {
+  res.render("client/pages/user/reset-password", {
+    pageTitle: "Đổi mật khẩu",
+  });
+};
+
+// [POST] /user/password/reset
+module.exports.resetPasswordPost = async (req, res) => {
+  const password = req.body.password;
+  const tokenUser = req.cookies.tokenUser;
+
+  try {
+    await User.updateOne({
+      tokenUser: tokenUser
+    }, {
+      password: md5(password)
+    });
+
+    res.redirect("/");
+  } catch (error) {
+    console.log(error);
+  }
 };
